@@ -1,0 +1,36 @@
+.TodoItem {
+    display: flex;  
+    justify-content: space-between;
+    width: 100%;
+    background-color: rgba(141, 174, 251, 0.2);
+    color: white;
+    margin: 5px 0px 5px 0px;
+    border-radius: 5px;
+}
+
+.TodoItem:hover{
+    border-color: purple;
+}
+
+.Icon, .Todo-item-p {
+    padding: 10px;
+}
+
+.Icon {
+    color: red;
+    font-weight: bold;
+}
+
+.Icon:nth-child(1) {
+    color: green;
+}
+
+.Icon:hover {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+.Icon:nth-child(1):hover {
+    background-color: green;
+}

@@ -1,0 +1,7 @@
+.TodoList {
+    margin-top: 25px;
+    width: 100%;
+    max-width: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+}
