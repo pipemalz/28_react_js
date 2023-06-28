@@ -1,7 +1,29 @@
 .TodoList {
-    margin-top: 25px;
     width: 100%;
     max-width: 300px;
     max-height: 500px;
     overflow-y: auto;
+    padding-right: 5px;
+}
+
+.TodoList::-webkit-scrollbar {
+    /* Establecer el ancho de la barra de desplazamiento */
+    width: 8px;
+}
+
+.TodoList::-webkit-scrollbar-track {
+    /* Establecer el color del fondo de la pista de la barra de desplazamiento */
+    background-color: transparent;
+}
+
+.TodoList::-webkit-scrollbar-thumb {
+    /* Establecer el color del pulgar de la barra de desplazamiento */
+    background-color: rgba(141, 174, 251, 0.2);
+    /* Redondear las esquinas del pulgar */
+    border-radius: 4px;
+}
+
+.TodoList::-webkit-scrollbar-thumb:hover {
+    /* Cambiar el color del pulgar cuando se pasa el cursor por encima */
+    background-color: rgba(141, 174, 251, 0.3);
 }

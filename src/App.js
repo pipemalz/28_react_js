@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import { TodoCounter  } from './TodoCounter';
 import { TodoList } from './TodoList';
@@ -6,34 +7,75 @@ import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CreateTodoButton';
 import { TodoAdd } from './TodoAdd';
 import { TodoClick } from './TodoClick';
-
-const defaultTodos = [
-  {text: "Ir a la peluqueria", completed: false},
-  {text: "Estudiar React Js", completed: false}
-];
-
-const completed = defaultTodos.filter(todo=> todo.completed).length;
+import { ShowDate } from './ShowDate';
+import { defaultTodos } from './defaultTodos';
 
 function App() {
+  const [searchValue, setSearchValue] = React.useState('');
+  const [todos, setTodos] = React.useState([]);
+  const [todoToAdd, setTodoToAdd] = React.useState("");
+
+  const completedTodos = todos.filter(todo=> !!todo.completed).length;
+  const totalTodos = todos.length;
+  const searchQuery = todos.filter(todo=>{
+      const todoText = todo.text.toLowerCase();
+      const searchText = searchValue.toLowerCase();
+      return todoText.includes(searchText);
+  });
+
   return (
-    <div className="App">
-      <TodoCounter completed={completed} total={defaultTodos.length} />
+    <div className="App">    
+      <TodoCounter 
+        completed={completedTodos} 
+        total={totalTodos} 
+      />
       
-      <TodoAdd />   
-      <CreateTodoButton/>
+      <TodoAdd 
+        todoToAdd={todoToAdd}
+        setTodoToAdd={setTodoToAdd}
+        todos={todos}
+        setTodos={setTodos}
+      > 
+        <CreateTodoButton
+          todoToAdd={todoToAdd}
+          setTodoToAdd={setTodoToAdd}
+          todos={todos}
+          setTodos={setTodos}
+        />
+      </TodoAdd>
 
-      <TodoList>
-        <TodoSearch />   
-        {defaultTodos.map((todo,index)=> (
-          <TodoItem 
-            key={index} 
-            text={todo.text} 
-            completed={todo.completed}
-          />
-        ))}
-      </TodoList>
+      <div>
+        <TodoSearch 
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
 
-      <TodoClick />
+        <TodoList>
+          {
+            searchQuery.length > 0 
+              ?
+                searchQuery.map((todo,index)=> (
+                  <TodoItem 
+                    key={index}
+                    index={index} 
+                    text={todo.text} 
+                    completed={todo.completed}
+                    todos={todos}
+                    setTodos={setTodos}
+                  />
+                ))
+              :
+                searchValue !== ''
+                  ?
+                    <i style={{opacity: "0.8", fontSize: 14}}>No se han encontrado resultados</i>
+                  :
+                    <i style={{opacity: "0.8", fontSize: 14}}>No tienes ToDo's pendientes</i>
+          }
+        </TodoList>
+      </div>
+      {/* <TodoClick />
+
+      <ShowDate /> */}
     </div>
   );
 } 
