@@ -18,10 +18,26 @@ function App() {
   const completedTodos = todos.filter(todo=> !!todo.completed).length;
   const totalTodos = todos.length;
   const searchQuery = todos.filter(todo=>{
-      const todoText = todo.text.toLowerCase();
-      const searchText = searchValue.toLowerCase();
+      const todoText = todo.text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+      const searchText = searchValue.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
       return todoText.includes(searchText);
   });
+
+  const completeTodo = index =>{
+    const todosCopy = [...todos];                
+    if(todosCopy[index].completed){
+        todosCopy[index].completed = false;
+    }else{
+        todosCopy[index].completed = true;
+    }
+    setTodos(todosCopy);
+  }
+
+  const deleteTodo = index => {
+    const todosCopy = [...todos];
+    todosCopy.splice(index, 1);
+    setTodos(todosCopy);
+  } 
 
   return (
     <div className="App">    
@@ -57,11 +73,10 @@ function App() {
                 searchQuery.map((todo,index)=> (
                   <TodoItem 
                     key={index}
-                    index={index} 
                     text={todo.text} 
                     completed={todo.completed}
-                    todos={todos}
-                    setTodos={setTodos}
+                    onComplete={()=>{completeTodo(index)}}
+                    onDelete={()=>{deleteTodo(index)}}
                   />
                 ))
               :
@@ -73,9 +88,8 @@ function App() {
           }
         </TodoList>
       </div>
-      {/* <TodoClick />
-
-      <ShowDate /> */}
+      
+      {/* <ShowDate /> */}
     </div>
   );
 } 

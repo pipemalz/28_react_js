@@ -8,7 +8,7 @@ function ShowDate(){
 
     return (
         <>
-            <p>{currentDate}</p>
+            <p className="Show-date-p">{currentDate}</p>
         </>
     );
 }

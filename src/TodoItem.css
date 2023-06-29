@@ -24,16 +24,3 @@
 .TodoItem:hover{
     background-color: rgba(141, 174, 251, 0.3);;
 }
-
-.icon-check, .icon-delete{
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.icon-check:hover, .icon-check--completed{
-    color: green;
-}
-
-.icon-delete:hover{
-    color: rgba(255, 0, 0, 1);
-}

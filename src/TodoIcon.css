@@ -1,0 +1,15 @@
+.Icon {
+    font-size: 20px;
+}
+
+.Icon-container{
+    cursor: pointer;
+}
+
+.Icon-container-check:hover .Icon{
+    fill: rgb(0, 170, 0);
+}
+
+.Icon-container-delete:hover .Icon{
+    fill: rgba(255, 0, 0, 1);
+}
